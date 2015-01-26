@@ -1,0 +1,244 @@
+﻿doctype html
+html
+  head
+    title= title
+    meta(name='viewport' content='initial-scale=1, user-scalable=false', width='device-width' )
+    link(rel='stylesheet', href='/stylesheets/ioicon.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/navbar-fixed-top.css')
+    //-link(rel='stylesheet', href='/stylesheets/iconos.css', type="text/css", charset="utf-8")
+    link(rel='stylesheet', href='/stylesheets/perfil.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-table.css')
+  body
+    nav(role="navigation").navbar.navbar-defaul.navbar-fixed-top
+        div.container
+            
+            div.navbar-header
+                img(src="/images/logo.png").logo
+                button(type="button" data-toggle="collapse"  data-target="#sidebar-collapse" aria-expanded="false" aria-controls="navbar").navbar-toggle.collapsed
+                    span.sr-only Toggle navigation
+                    span.ion-navicon-round 
+                
+                a(href="#").navbar-brand 
+                    
+            div(id="navbar" ).navbar-collapse.collapse
+                ul.nav.navbar-nav
+                    //li.active
+                        a(href="#") Inicio
+                    //li
+                        a(href="#about") About
+                    //li 
+                        a(href="#Contact") Contacto
+
+                ul.nav.navbar-nav.navbar-right
+                    li.dropdown 
+                        a.ion-android-settings(href="#drop" role="button" class="dropdown-toggle" data-toggle="dropdown")
+                        ul.dropdown-menu(role="menu" aria-labelledby="drop")
+                            li 
+                                a(href="#Config") Configuracion
+                            li
+                                a Opcion 2
+                            li
+                                a Opcion 3
+                    li.dropdown 
+                        a.ion-ios7-contact(href="#drop1" role="button" class="dropdown-toggle" data-toggle="dropdown")
+                        ul.dropdown-menu(role="menu" aria-labelledby="drop1")
+                            li
+                                a(href="/logout").ion-log-out Salir
+                          
+ 
+    div.container.load                    
+        div.ion-loading-c       
+    div#sidebar-collapse.col-sm-3.col-lg-2.sidebar
+        form(role="search")
+            div(class="form-group")
+                input(type="text" class="form-control" placeholder="Buscar")
+        ul.nav.menu
+            li
+                a(href="#")
+                    span Option 1
+                    
+            li
+                a(href="#")
+                    span
+                    |Widgets
+            li 
+                a(href="#")
+                    span
+                    |Graficas
+            li 
+                a(href="#config" data-toggle="tab")
+                    span
+                    | Tables
+            li
+                a(href="#")
+                    span
+                    |Forms
+            li
+                a(href="#")
+                    span
+                    |Alerts &amp; Panels
+            li.parent
+                a(href="#")
+                    span Dropdown
+                    span(data-toggle="collapse" href="#sub-item-1" class="ion-android-add ")
+                        em
+                ul.children.collapse#sub-item-1
+                    li
+                        a(href="#")
+                            span Sub Item 1
+            li(role="presentation" class="divider")
+            li
+                a(href="login.html")
+                    span Login Page            
+    div#errorDisplay                   
+    div.container.ts.see.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
+        ul(role="tablist").nav.nav-tabs
+            li.active#inicio
+                a(href="#principal" data-toggle="tab") Equipos en servicio
+
+            li#ServicioT
+                a(href="#ServicioTable" data-toggle="tab") Servicios
+
+            li#ProdsT
+                a(href="#ProdsTable" data-toggle="tab") Productos
+            li#Config
+                a(href="#config" data-toggle="tab") Configuracion
+
+                //div(class="closec ion-android-close")
+                //button(type="button" class="close" data-dismiss="cerr" aria-hiden="true").ion-android-close
+                      
+     
+    if ordenes.lenght > 0
+    div.container.tab-content.see.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
+
+        div(id="principal" class="fade in active" ).tab-pane
+            each i in ordenes
+                div.col-sm-4
+                    div.panel.panel-default
+                        div.panel-heading
+                            h4.panel-tittle.text-center
+                                .left=i.Serie + '-' + i.Orden + ' '
+                                    .right=i.estatus
+                                        div(id=i.id name=i.Serie+'-'+i.Orden).expand.ion-android-note       
+                        div.panel-body
+                         
+                            img(src=imagen+i.Serie +'-'+i.Orden+'-1.jpg' alt="").img-thumbnail
+                            p 
+                                strong Equipo:
+                                = i.TipoEquipo
+                                br
+                                strong Numero De Serie:
+                                =i.Registro
+                                br
+                                strong Descripcion del Problema:
+                                = i.Pro_Observpo
+
+                                br
+                                //a(class="icon ion-alert")
+        div(id="ServicioTable" class="fade" ).tab-pane
+            div
+                div.panel.panel-default
+                    div.panel-heading 
+                    div.panel-body
+                        table(data-toggle="table" data-url="/tables/ordenes" data-show-refresh="true" data-show-toggle="true"
+                                data-show-columns="true" data-search="true" data-select-item-name="Servicios" data-pagination="true"
+                                data-sort-name="name" data-sort-order="desc")
+
+                                thead
+                                    tr
+                                        th(data-field="state" data-checkbox="true" modified="true") Item
+                                        th(data-field="id" data-sortable="true") ID
+                                        th(data-field="Serie" data-sortable="true") Serie
+                                        th(data-field="Orden" data-sortable="true") Numero
+                                        th(data-field="TipoEquipo" data-sortable="true") Equipo
+                                        th(data-field="ClienteNom" data-sortable="true") Cliente
+                                        th(data-field="estatus" data-sortable="true") Estatus
+                                        
+                                       
+
+         div(id="ProdsTable" class="fade" ).tab-pane
+            div
+                div.panel.panel-default
+                    div.panel-heading 
+                    div.panel-body
+                        table(data-toggle="table" data-url="/tables/prods" data-show-refresh="true" data-show-toggle="true"
+                                data-show-columns="true" data-search="true" data-select-item-name="Productos" data-pagination="true"
+                                data-sort-name="name" data-sort-order="desc")
+
+                                thead
+                                    tr
+                                        th(data-field="state" data-checkbox="true" modified="true") Item
+                                        th(data-field="ARTICULO" data-sortable="true") Articulo
+                                        th(data-field="DESCRIP" data-sortable="true") Descripcion
+                                        th(data-field="PRECIO1" data-sortable="true") PRECIO1
+
+        div(id="config" class="fade" ).tab-pane
+            div
+                div.panel.panel-default
+                    div.panel-heading 
+                        h5 Configuracion
+                    div.panel-body
+                        div.col-md-6
+                            form(role="form")
+                                div.form-group
+                                    label Direccion de Base de Datos
+                                    input.form-control(placeholder="Ruta")
+                                div.form-group
+                                    label URL / Google Drive para imagenes
+                                    input.form-control(placeholder="Google Drive")
+                                div.form-group
+                                    label Font Zise
+                                    input.form-control(type="number" value="12")
+
+                                
+
+                        
+                                        
+           
+                             
+    div.container.see(class="fade in")#Contact GrupoCf
+        form(action='/contacto' method='post')
+            //input(type="email" name="email" required)
+            //input(type="url" name="url" required)
+            //input(type="tel" name="tel" id="tel" required)
+            //input(type="number" min="5" max="18" step="0.5" value="9" name="shoe-size")
+            //input(id="skill" type="range" min="1" max="100" value="0")
+            //input(id="startdate" name="startdate" min="2012-01-01" max="2020-01-01" type="date")
+            //input(id="expiry" name="expiry" type="month" required)
+            //input(id="vacation" name="vacation" type="week")
+            //input(id="exit-time" name="exit-time" type="time")
+            //input(id="entry-day-time" name="entry-day-time" type="datetime")
+            //input(id="arrival-time" name="arrival-time " type="datetime-local")
+            //input(id="color" name="color" type="color")
+
+      
+                            
+                         
+    script(src='/javascripts/jquery-2.1.0.js' type="text/javascript")
+    script(src='/javascripts/bootstrap.min.js' type="text/javascript")
+    script(src='/javascripts/bootstrap-table.js' type="text/javascript")
+    script(src='/javascripts/ie10-viewport-bug-workaround.js' type="text/javascript")
+    script(src='/javascripts/javascript.js' type="text/javascript")
+    script(src='/javascripts/tab.js' type="text/javascript")
+    script(src='/javascripts/transition.js' type="text/javascript")
+    script(src='/javascripts/alert.js' type="text/javascript")
+    script(src='/javascripts/tooltip.js' type="text/javascript")
+    script(src='/javascripts/popover.js' type="text/javascript")
+    //script(src='/javascripts/datePattern.js' type="text/javascripts")
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

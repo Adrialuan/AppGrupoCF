@@ -1,0 +1,37 @@
+﻿doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/navbar-fixed-top.css')
+    //link(rel='stylesheet', href='/stylesheets/perfil.css')
+    link(rel='stylesshet', href='/fonts/iconos/iconos.css')
+    meta(charset="utf-8")
+    meta(http-equiv="X-EA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="description" content="")
+    meta(name="author" content="")
+    
+  body
+    div.container
+        div.col-sm-6.col-sm-offset-3
+            h1
+                span.fa.fa-sign-in Registrarse
+
+            if message != '' 
+                div.alert.alert-danger= message
+            form(action="/signup" method="post")
+                div.form-group
+                    label Usuario
+                    input(type="text" name="username" required autofocus).form-control
+                div.form-group
+                    label Contraseña
+                    input(type="password" name="password" required).form-control
+                button(type="submit").btn.btn-warning.btn-lg Registrar
+            hr
+            p Ya tienes una cuenta: 
+                a(href="/login") Entrar
+            p O ve 
+                a(href="/") Inicio
+     
+             

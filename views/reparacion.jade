@@ -1,0 +1,30 @@
+﻿div.reparacion
+    //datalis
+    //    select(name="prods")
+    //input(type='search' name='empleado' placeholder='Empleado' autofocus required pattern="[0-9][A-Z]{3}" title="Nombre del empleado" list="tecnico").empleado
+    input(type='text' name='prod' placeholder='Producto' autocomplete="off").prods
+    button(type="button" class="btn btn-default").ion-ios7-cart.carrito
+    div#products
+    div.venta
+        div.encabe Refacciones
+        if partidas != ""  
+            for i in partidas
+                section.partida.col-xs-12
+                    - var precio = (i.PRECIO * 1.16).toFixed(2)
+                    div.col-xs-10
+                        div=i.OBSERV
+                        div='Cantidad:' + i.CANTIDAD + ' ' + 'Precio: ' + precio
+                        div='Clave: ' + i.ARTICULO
+                           
+                    div.col-xs-2
+                        div.ion-edit
+                        div.ion-android-trash
+        if partidas != ""    
+          
+            div.total1.col-xs-2.col-xs-offset-6.col-sm-offset-8
+                strong Total:
+            - var total = (partidas[0].IMPORTE + partidas[0].IMPUESTO).toFixed(2)
+            div.total1.col-xs-2.text-right
+                strong=total
+          
+ 

@@ -1,0 +1,9 @@
+﻿if (prods.length > 0)
+    ul.produc
+        for i in prods
+            - var precio = (i.PRECIO1 * 1.16).toFixed(2)
+            li(clave=i.ARTICULO descripcion= i.DESCRIP precio=precio ).articulo
+                div=i.ARTICULO + '    '  + '$' + precio
+                div.descrip=i.DESCRIP
+          
+           

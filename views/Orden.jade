@@ -1,0 +1,183 @@
+﻿div.container.row
+    div.col-sm-6
+        div.pann
+            section.contact
+                | CONTACTO
+                .ion-android-contact
+            div 
+                |CLAVE: 
+                =orden.Cliente
+            div 
+                |NOMBRE: 
+                =orden.ClienteNom
+            div 
+                |TELEFONO: 
+                =orden.ClienteTel
+            div 
+                |REPORTADO POR: 
+                =orden.Contacto
+            div
+                |DIRECCION: 
+                =orden.ClienteDir
+        div.pann
+            section.DatosEquipo 
+                |DATOS DEL EQUIPO
+                .ion-ios7-monitor
+            div 
+                |EQUIPO: 
+                =orden.TipoEquipo
+            if (orden.Registro != "")
+            div 
+                |NUMERO DE SERIE: 
+                =orden.Registro
+            if (orden.Marca != "")
+                div 
+                    |MARCA: 
+                    =orden.Marca
+            if (orden.Modelo != "")
+                div MODELO: 
+                    =orden.Modelo
+            if (orden.Password != "") 
+                div CONTRASEÑA: 
+                    =orden.Password
+            if (orden.ObservEquipo != "")
+                div DESCRIPCION DEL EQUIPO: 
+                    =orden.ObservEquipo
+        div.pann
+            section.Accesorios
+                | ACCESORIOS
+                .ion-android-star
+            if (orden.Teclado === 1) 
+                div.ion-checkmark Teclado
+            if (orden.CPU === 1)
+                div.ion-checkmark CPU
+            if (orden.Discos === 1)
+                div.ion-checkmark Discos
+            if (orden.Funda === 1)
+                div.ion-checkmark Funda
+            if (orden.FuentePoder === 1) 
+                div.ion-checkmark 
+                div FUENTE DE PODER  S/N: 
+                div=orden.FuenteSn 
+                
+            if (orden.USB === 1)
+                div.ion-checkmark USB
+            if (orden.Monitor === 1)
+                div.ion-checkmark Monitor: 
+                div=orden.Monitorsn
+            if  (orden.AccOtro != "")
+                div=orden.AccOtro
+    
+        div.pann
+            section.TipoServicio
+                | TIPO DE SERVICIO
+                .ion-compose
+            if (orden.Garantia === 1)
+                div Garantia 
+            if (orden.Poliza === 1)
+                div Poliza
+            if (orden.Preventivo === 1)
+                div Preventivo
+            if (orden.Correctivo === 1)
+                div Correctivo
+            if (orden.ServOtro != "")
+                div=orden.ServOtro
+            if (orden.Hardware === 1)
+                div Hardware
+            if (orden.Software === 1)
+                div Software
+            if (orden.MaOperacion === 1 )
+                div Mala Operacion
+            if (orden.Pro_Observ != "")
+                div Descripcion del problema: 
+                    =orden.Pro_Observ
+
+        div.pann
+            section.Adicionales
+                | DETALLE DE ORDEN
+            if (orden.VendNom  != "")
+                div Recibido Por: 
+                    =' ' + orden.VendNom
+            if (orden.VENTA > 0) 
+                div Numero de venta : 
+                    div.noVenta 
+                        =orden.VENTA
+            if (orden.Prioridad != "")
+
+                div Prioridad:  
+                    =orden.Prioridad
+
+    div.Servicio.col-sm-6
+        div.pann
+            section.LineaTiempo
+                | HISTORIAL DEL SERVICIO
+                a(data-toggle="modal" data-target="#ID-"+orden.id ).ion-clipboard
+            div.col-sm-12.coment
+                div.tRespuesta Ingreso
+                div.observ
+                    =pendiente.PENDIENTE
+                div.observ
+                    =pendiente.OBSERV
+                div.time
+                    div.hora
+                        =pendiente.HoraR
+                    div.fecha 
+                        =pendiente.FechaR
+                
+
+            each i in respuesta
+                div.col-sm-12.coment
+                    //div.arrow-left2
+                    //div.arrow-left
+                    div.tRespuesta 
+                        =i.Respuesta
+                        if (i.Respuesta === "Asignar")
+                            div.usuario
+                                =i.Usuario
+                        
+                    div.observ
+                        =i.Observ
+                    div.time
+                        div.hora
+                            =i.HoraT
+                        div.fecha
+                            =i.FechaT
+
+div(id="ID-"+orden.id class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div.modal-header
+                button(type="button" class="close" data-dismiss="modal" aria-hidden="true").ion-close-round
+                
+                h4 Eventos
+            div.modal-body
+                form(action='/OrdenRes' method='post')
+                    div.form-group
+                        div.fechas
+                            input(id="startdate" name="startdate" type="date").col-xs-6.col-md-3.col-md-offset-6
+                            input(id="exit-time" name="exit-time" type="time").col-xs-6.col-md-3
+                            input(id="startdate" name="startdate" type="date").col-xs-6.col-md-3.col-md-offset-6
+                            input(id="exit-time" name="exit-time" type="time").col-xs-6.col-md-3
+                        div 
+                            select(class='respuesta' name="respuesta" id=orden.id)
+                                option(value='ninguna') Elige tu respuesta
+                                option(value='asignar') Asignar
+                                option(value='diagnostico') Diagnostico
+                                option(value='reparacion') Reparacion
+                                option(value='termino') Terminar
+                                option(value='entregar') Entregar
+                            button(type="button" class="btn btn-default").ion-calendar
+                                           
+                        div#detalleRespues
+
+                        textarea(type='text' name='comentario' placeholder='comentarios' autocomplete='off').form-control.comentarios
+                    div.modal-footer.form-group
+                        button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+                        button(type="submit" class="btn btn-primary") Guardar  
+               
+            //div.modal-footer.form-group
+                //button(type="button" class="btn btn-default" data-dismiss="modal") Cerrar
+                //button(type="submit" class="btn btn-primary") Guardar    
+                    
+            
+             
