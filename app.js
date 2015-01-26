@@ -1,4 +1,4 @@
-﻿// server.js
+// server.js
 
 // set up ======================================================================
 // get all the tools we need
@@ -75,5 +75,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
-
-module.exports = app;
+app.listen(3000, function() {
+    console.log("Server listening on port 3000.");
+});
+//module.exports = app;
