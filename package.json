@@ -5,10 +5,10 @@
     "scripts": {
         "start": "node ./bin/www"
     },
-    "description": "Login",
+    "description": "Control y seguimiento de ordenes de servicio",
     "author": {
-        "name": "Usuario",
-        "email": ""
+        "name": "Adrian Martinez Lopez",
+        "email": "soportesis@grupocf.com.mx"
     },
     "dependencies": {
         "express": "~4.9.0",
